@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "name": "Scheduler Demo Site",
+  "description": "Demonstrates AI-actionable capability for booking interviews or scheduling events.",
+  "intents": [
+    {
+      "name": "book_interview",
+      "description": "Books an interview or meeting slot on the creator's calendar.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "interviewee_name": {
+            "type": "string",
+            "description": "The name of the person being interviewed."
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "The preferred date for the interview (YYYY-MM-DD)."
+          },
+          "time_slot": {
+            "type": "string",
+            "description": "The specific time slot for the interview (e.g., '10:00 AM')."
+          },
+          "duration_minutes": {
+            "type": "integer",
+            "description": "Duration of the interview in minutes."
+          }
+        },
+        "required": ["interviewee_name", "date", "time_slot"]
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string", "enum": ["success", "failed"] },
+          "message": { "type": "string", "description": "A message describing the outcome." },
+          "booking_id": { "type": "string", "description": "Simulated ID of the booking." },
+          "calendar_event_url": { "type": "string", "format": "uri", "description": "Simulated URL to the calendar event." }
+        },
+        "required": ["status", "message"]
+      },
+      "endpoint": "/api/book",
+      "method": "POST",
+      "authentication": { "type": "none" }
+    }
+  ]
+}
